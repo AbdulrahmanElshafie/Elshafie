@@ -54,22 +54,71 @@ const navItems = [
             <path d="M3.33334 8H12.6667M12.6667 8L8.00001 3.33333M12.6667 8L8.00001 12.6667" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
+        <!-- Theme Toggle -->
+        <button
+          type="button"
+          class="theme-toggle"
+          id="theme-toggle-btn"
+          aria-label="Toggle dark mode"
+          title="Toggle dark / light mode"
+        >
+          <!-- Sun icon (shown in dark mode) -->
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <!-- Moon icon (shown in light mode) -->
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
       </div>
     </nav>
 
-    <!-- Mobile Menu Button -->
-    <button
-      type="button"
-      class="mobile-menu-toggle"
-      id="mobile-menu-toggle"
-      aria-expanded="false"
-      aria-controls="mobile-nav"
-      aria-label="Toggle navigation menu"
-    >
-      <span class="hamburger-bar"></span>
-      <span class="hamburger-bar"></span>
-      <span class="hamburger-bar"></span>
-    </button>
+    <!-- Mobile Menu Button + Theme Toggle -->
+    <div class="mobile-right-controls">
+      <button
+        type="button"
+        class="theme-toggle"
+        id="theme-toggle-btn-mobile"
+        aria-label="Toggle dark mode"
+        title="Toggle dark / light mode"
+      >
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+      <button
+        type="button"
+        class="mobile-menu-toggle"
+        id="mobile-menu-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="Toggle navigation menu"
+      >
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+    </div>
   </div>
 
   <!-- Mobile Dropdown Navigation -->
@@ -101,11 +150,11 @@ const navItems = [
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: rgba(250, 248, 245, 0.92);
+    background-color: color-mix(in srgb, var(--color-bg) 92%, transparent);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--color-border-subtle);
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    border-bottom: 1px solid var(--color-line);
+    transition: background-color 0.22s ease, border-color 0.22s ease;
   }
 
   .header-container {
@@ -128,19 +177,19 @@ const navItems = [
     width: 36px;
     height: 36px;
     border-radius: 8px;
-    background-color: var(--color-navy-dark);
+    background-color: var(--color-ink);
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    box-shadow: 0 2px 4px rgba(18, 24, 34, 0.15);
+    box-shadow: var(--shadow-sm);
   }
 
   .brand-monogram {
     font-family: var(--font-mono);
     font-size: 0.8125rem;
     font-weight: 700;
-    color: #FAF8F5;
+    color: var(--color-bg);
     letter-spacing: -0.05em;
   }
 
@@ -151,8 +200,8 @@ const navItems = [
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: var(--color-accent-primary);
-    border: 2px solid var(--color-bg-canvas);
+    background-color: var(--color-accent);
+    border: 2px solid var(--color-bg);
   }
 
   .brand-text {
@@ -172,7 +221,7 @@ const navItems = [
     font-family: var(--font-mono);
     font-size: 0.6875rem;
     font-weight: 500;
-    color: var(--color-accent-primary);
+    color: var(--color-accent);
     line-height: 1.2;
     letter-spacing: 0.02em;
   }
@@ -202,26 +251,32 @@ const navItems = [
   }
 
   .nav-link:hover {
-    color: var(--color-text-primary);
-    background-color: var(--color-bg-subtle);
+    color: var(--color-ink);
+    background-color: var(--color-surface-alt);
   }
 
   .nav-link.is-active {
-    color: var(--color-text-primary);
+    color: var(--color-ink);
     font-weight: 600;
-    background-color: var(--color-bg-subtle);
+    background-color: var(--color-surface-alt);
   }
 
   /* Mobile Toggle */
-  .mobile-menu-toggle {
+  .mobile-right-controls {
     display: none;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
     width: 40px;
     height: 40px;
     background: transparent;
-    border: 1px solid var(--color-border-default);
+    border: 1px solid var(--color-line);
     border-radius: 8px;
     padding: 8px;
     cursor: pointer;
@@ -230,15 +285,15 @@ const navItems = [
   .hamburger-bar {
     width: 100%;
     height: 2px;
-    background-color: var(--color-text-primary);
+    background-color: var(--color-ink);
     border-radius: 2px;
     transition: transform 0.2s ease, opacity 0.2s ease;
   }
 
   /* Mobile Dropdown */
   .mobile-nav {
-    background-color: var(--color-bg-surface);
-    border-bottom: 1px solid var(--color-border-default);
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-line);
     padding: 20px 0 24px;
   }
 
@@ -261,8 +316,8 @@ const navItems = [
   }
 
   .mobile-nav-link:hover {
-    background-color: var(--color-bg-subtle);
-    color: var(--color-accent-primary);
+    background-color: var(--color-surface-alt);
+    color: var(--color-accent);
   }
 
   @media (max-width: 820px) {
@@ -270,13 +325,14 @@ const navItems = [
       display: none;
     }
 
-    .mobile-menu-toggle {
+    .mobile-right-controls {
       display: flex;
     }
   }
 </style>
 
 <script>
+  // ── Mobile nav toggle ──────────────────────────────────────
   const toggleBtn = document.getElementById('mobile-menu-toggle');
   const mobileNav = document.getElementById('mobile-nav');
 
@@ -291,7 +347,6 @@ const navItems = [
       }
     });
 
-    // Close on link click
     const mobileLinks = mobileNav.querySelectorAll('a');
     mobileLinks.forEach(link => {
       link.addEventListener('click', () => {
@@ -300,4 +355,26 @@ const navItems = [
       });
     });
   }
+
+  // ── Theme toggle ───────────────────────────────────────────
+  function applyTheme(theme: string) {
+    document.documentElement.setAttribute('data-theme', theme);
+    try { localStorage.setItem('portfolio-theme', theme); } catch (e) {}
+  }
+
+  function getTheme(): string {
+    try {
+      const stored = localStorage.getItem('portfolio-theme');
+      if (stored) return stored;
+    } catch (e) {}
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') || getTheme();
+    applyTheme(current === 'dark' ? 'light' : 'dark');
+  }
+
+  const toggleBtns = document.querySelectorAll('#theme-toggle-btn, #theme-toggle-btn-mobile');
+  toggleBtns.forEach(btn => btn.addEventListener('click', toggleTheme));
 </script>

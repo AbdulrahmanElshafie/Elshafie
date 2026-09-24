@@ -28,6 +28,17 @@ const currentPath = Astro.url.pathname;
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Blocking theme script: prevents flash of wrong theme -->
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('portfolio-theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = stored || (prefersDark ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {}
+      })();
+    </script>
     <SEOHead
       title={title}
       description={description}

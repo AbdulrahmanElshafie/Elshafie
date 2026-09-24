@@ -1,60 +1,176 @@
-/* Global Design System & Variables for Abdulrahman Saeed Elshafie Portfolio */
+/* ============================================================
+   GLOBAL DESIGN SYSTEM — Abdulrahman Saeed Elshafie Portfolio
+   Editorial × Architectural visual language
+   Light + Dark modes
+   ============================================================ */
 
+/* ── Google Fonts ───────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;450;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+/* ── Light Mode Tokens (default) ────────────────────────────── */
 :root {
-  /* Warm cream & ivory base palette */
-  --color-bg-canvas: #FAF8F5;
-  --color-bg-surface: #FFFFFF;
-  --color-bg-subtle: #F4EFEA;
-  --color-bg-card: #FFFFFF;
-  --color-bg-elevated: #F9F7F3;
-  --color-bg-dark: #121822;
-  --color-bg-dark-card: #1B2433;
+  /* Canvas */
+  --color-bg:          #F6F3EE;
+  --color-surface:     #FDFCFA;
+  --color-surface-alt: #EDE9E2;
+  --color-elevated:    #FFFFFF;
 
-  /* Typography Colors (Graphite / Near-black) */
-  --color-text-primary: #12171E;
-  --color-text-secondary: #3B4451;
-  --color-text-muted: #647080;
-  --color-text-subtle: #8A97A6;
-  --color-text-inverse: #FAF8F5;
+  /* Typography */
+  --color-ink:         #17191C;
+  --color-ink-2:       #3C4148;
+  --color-muted:       #6D737C;
+  --color-subtle:      #9BA0A8;
 
-  /* Accent: Muted Amber & Warm Ochre */
-  --color-accent-primary: #B45309;
-  --color-accent-hover: #92400E;
-  --color-accent-light: #FEF3C7;
-  --color-accent-border: #FCD34D;
-  --color-accent-subtle: #FFFBEB;
+  /* Borders */
+  --color-line:        #DDD9D3;
+  --color-line-strong: #C5BFB5;
+  --color-line-subtle: #EAE6E0;
 
-  /* Secondary: Dusty Purple & Slate Navy */
-  --color-purple-primary: #5A5173;
-  --color-purple-light: #F2EFF7;
-  --color-purple-border: #D8D2E7;
-  --color-navy-dark: #141B26;
-  --color-navy-surface: #1E2838;
+  /* Accent — Rust Terracotta (used sparingly) */
+  --color-accent:      #B84A1C;
+  --color-accent-2:    #963B14;
+  --color-accent-bg:   #F9EDE7;
+  --color-accent-line: #E8B49A;
 
-  /* Borders & Dividers */
-  --color-border-subtle: #ECE6DD;
-  --color-border-default: #DFD7CC;
-  --color-border-strong: #C9BFB0;
+  /* Navy — technical identity */
+  --color-navy:        #233044;
+  --color-navy-2:      #1A2535;
 
-  /* Status Colors */
-  --color-success: #0F766E;
-  --color-success-bg: #ECFDF5;
-  --color-success-border: #A7F3D0;
+  /* Pewter-Purple — secondary accent */
+  --color-purple:      #615878;
+  --color-purple-bg:   #EEE9F2;
+  --color-purple-line: #CBC2D9;
 
-  /* Typography Scales */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  /* Status */
+  --color-ok:          #127C60;
+  --color-ok-bg:       #E8F5F1;
 
-  /* Elevation Shadows */
-  --shadow-sm: 0 1px 2px rgba(18, 23, 30, 0.04);
-  --shadow-md: 0 4px 12px -2px rgba(18, 23, 30, 0.06), 0 2px 4px -2px rgba(18, 23, 30, 0.03);
-  --shadow-lg: 0 12px 24px -4px rgba(18, 23, 30, 0.08), 0 4px 8px -2px rgba(18, 23, 30, 0.04);
-  --shadow-card-hover: 0 16px 32px -6px rgba(18, 23, 30, 0.1), 0 6px 12px -3px rgba(18, 23, 30, 0.05);
+  /* Shadows — subtle, warm-tinted */
+  --shadow-xs: 0 1px 2px rgba(23, 25, 28, 0.05);
+  --shadow-sm: 0 2px 6px rgba(23, 25, 28, 0.06), 0 1px 2px rgba(23, 25, 28, 0.04);
+  --shadow-md: 0 6px 18px -2px rgba(23, 25, 28, 0.08), 0 2px 6px -1px rgba(23, 25, 28, 0.04);
+  --shadow-lg: 0 14px 32px -4px rgba(23, 25, 28, 0.1), 0 4px 10px -2px rgba(23, 25, 28, 0.05);
 
-  /* Layout Container */
-  --container-max-width: 1140px;
+  /* Typography */
+  --font-heading: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:    'IBM Plex Mono', 'JetBrains Mono', SFMono-Regular, monospace;
+  /* Legacy aliases (used in components) */
+  --font-sans:    var(--font-body);
+
+  /* Layout */
+  --container-max-width:    1200px;
   --container-narrow-width: 820px;
-  --space-unit: 8px;
+
+  /* Dark-section raw colours (always dark regardless of theme) */
+  --color-bg-dark:      #0D0F10;
+  --color-bg-dark-card: #161A1D;
+  --color-navy-dark:    #233044;
+  --color-navy-surface: #1A2535;
+
+  /* Theme transition */
+  --theme-transition: background-color 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+}
+
+/* ── Dark Mode Tokens ────────────────────────────────────────── */
+[data-theme="dark"] {
+  --color-bg:          #0D0F10;
+  --color-surface:     #161A1D;
+  --color-surface-alt: #1D2226;
+  --color-elevated:    #22282D;
+
+  --color-ink:         #ECEEF0;
+  --color-ink-2:       #A8B0B8;
+  --color-muted:       #6E7880;
+  --color-subtle:      #4A5560;
+
+  --color-line:        #252C33;
+  --color-line-strong: #323B44;
+  --color-line-subtle: #1C2227;
+
+  /* Accent — Amber Brass */
+  --color-accent:      #D4883A;
+  --color-accent-2:    #BC7530;
+  --color-accent-bg:   #1F1710;
+  --color-accent-line: #6B4020;
+
+  --color-navy:        #7EA3C4;
+  --color-navy-2:      #5E84A6;
+
+  --color-purple:      #9E8DB8;
+  --color-purple-bg:   #1C1925;
+  --color-purple-line: #3E3558;
+
+  --color-ok:          #34B891;
+  --color-ok-bg:       #0C2520;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 6px 18px -2px rgba(0, 0, 0, 0.36), 0 2px 6px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 14px 32px -4px rgba(0, 0, 0, 0.4), 0 4px 10px rgba(0, 0, 0, 0.24);
+}
+
+/* ── System dark-mode fallback (no JS) ───────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg:          #0D0F10;
+    --color-surface:     #161A1D;
+    --color-surface-alt: #1D2226;
+    --color-elevated:    #22282D;
+    --color-ink:         #ECEEF0;
+    --color-ink-2:       #A8B0B8;
+    --color-muted:       #6E7880;
+    --color-subtle:      #4A5560;
+    --color-line:        #252C33;
+    --color-line-strong: #323B44;
+    --color-line-subtle: #1C2227;
+    --color-accent:      #D4883A;
+    --color-accent-2:    #BC7530;
+    --color-accent-bg:   #1F1710;
+    --color-accent-line: #6B4020;
+    --color-navy:        #7EA3C4;
+    --color-navy-2:      #5E84A6;
+    --color-purple:      #9E8DB8;
+    --color-purple-bg:   #1C1925;
+    --color-purple-line: #3E3558;
+    --color-ok:          #34B891;
+    --color-ok-bg:       #0C2520;
+    --shadow-xs: 0 1px 2px rgba(0,0,0,.25);
+    --shadow-sm: 0 2px 6px rgba(0,0,0,.3), 0 1px 2px rgba(0,0,0,.2);
+    --shadow-md: 0 6px 18px -2px rgba(0,0,0,.36), 0 2px 6px rgba(0,0,0,.2);
+    --shadow-lg: 0 14px 32px -4px rgba(0,0,0,.4), 0 4px 10px rgba(0,0,0,.24);
+  }
+}
+
+/* ── Legacy alias maps (keep old vars working in components) ─── */
+:root {
+  --color-bg-canvas:       var(--color-bg);
+  --color-bg-surface:      var(--color-surface);
+  --color-bg-subtle:       var(--color-surface-alt);
+  --color-bg-card:         var(--color-surface);
+  --color-bg-elevated:     var(--color-elevated);
+  --color-text-primary:    var(--color-ink);
+  --color-text-secondary:  var(--color-ink-2);
+  --color-text-muted:      var(--color-muted);
+  --color-text-subtle:     var(--color-subtle);
+  --color-text-inverse:    var(--color-bg);
+  --color-accent-primary:  var(--color-accent);
+  --color-accent-hover:    var(--color-accent-2);
+  --color-accent-light:    var(--color-accent-bg);
+  --color-accent-border:   var(--color-accent-line);
+  --color-accent-subtle:   var(--color-accent-bg);
+  --color-purple-primary:  var(--color-purple);
+  --color-purple-light:    var(--color-purple-bg);
+  --color-purple-border:   var(--color-purple-line);
+  --color-border-subtle:   var(--color-line-subtle);
+  --color-border-default:  var(--color-line);
+  --color-border-strong:   var(--color-line-strong);
+  --color-success:         var(--color-ok);
+  --color-success-bg:      var(--color-ok-bg);
+  --color-success-border:  var(--color-ok-bg);
+  --shadow-card-hover:     var(--shadow-lg);
+  --container-max-width:   1200px;
+  --container-narrow-width: 820px;
 }
 
 /* CSS Reset & Defaults */
@@ -65,14 +181,15 @@
 }
 
 html {
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   font-size: 16px;
-  line-height: 1.6;
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-canvas);
+  line-height: 1.65;
+  color: var(--color-ink);
+  background-color: var(--color-bg);
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: var(--theme-transition);
 }
 
 body {
@@ -80,6 +197,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  background-color: var(--color-bg);
 }
 
 main {
@@ -88,7 +206,7 @@ main {
 
 /* Accessibility Focus States */
 :focus-visible {
-  outline: 2px solid var(--color-accent-primary);
+  outline: 2px solid var(--color-accent);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -98,8 +216,8 @@ main {
   top: -60px;
   left: 20px;
   padding: 10px 18px;
-  background: var(--color-navy-dark);
-  color: #FFFFFF;
+  background: var(--color-ink);
+  color: var(--color-bg);
   font-weight: 600;
   text-decoration: none;
   z-index: 9999;
@@ -113,7 +231,8 @@ main {
 
 /* Typography Hierarchy */
 h1, h2, h3, h4, h5, h6 {
-  color: var(--color-text-primary);
+  font-family: var(--font-heading);
+  color: var(--color-ink);
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.02em;
@@ -138,7 +257,8 @@ h4 {
 }
 
 p {
-  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  color: var(--color-ink-2);
   margin-bottom: 1rem;
 }
 
@@ -147,19 +267,19 @@ p:last-child {
 }
 
 p.lead {
-  font-size: 1.15rem;
-  line-height: 1.7;
-  color: var(--color-text-secondary);
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--color-ink-2);
 }
 
 a {
-  color: var(--color-accent-primary);
+  color: var(--color-accent);
   text-decoration: none;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
 a:hover {
-  color: var(--color-accent-hover);
+  color: var(--color-accent-2);
 }
 
 /* Layout Containers */
@@ -193,16 +313,16 @@ a:hover {
 }
 
 .section-alt {
-  background-color: var(--color-bg-subtle);
-  border-top: 1px solid var(--color-border-subtle);
-  border-bottom: 1px solid var(--color-border-subtle);
+  background-color: var(--color-surface-alt);
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
 }
 
 .section-dark {
-  background-color: var(--color-bg-dark);
-  color: var(--color-text-inverse);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #0D0F10;
+  color: #ECEEF0;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .section-dark h2, .section-dark h3, .section-dark h4 {
@@ -223,16 +343,16 @@ a:hover {
   align-items: center;
   gap: 8px;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-accent-primary);
-  margin-bottom: 12px;
+  letter-spacing: 0.14em;
+  color: var(--color-accent);
+  margin-bottom: 14px;
 }
 
 .section-dark .section-eyebrow {
-  color: #F59E0B;
+  color: var(--color-accent);
 }
 
 .section-title {
@@ -240,9 +360,10 @@ a:hover {
 }
 
 .section-subtitle {
-  font-size: 1.125rem;
-  color: var(--color-text-muted);
-  max-width: 680px;
+  font-size: 1.075rem;
+  color: var(--color-muted);
+  max-width: 660px;
+  line-height: 1.7;
 }
 
 /* Button System */
@@ -265,57 +386,60 @@ a:hover {
 }
 
 .btn-primary {
-  background-color: var(--color-navy-dark);
-  color: #FFFFFF;
-  border-color: var(--color-navy-dark);
-  box-shadow: 0 2px 4px rgba(18, 24, 34, 0.12);
-}
-
-.btn-primary:hover {
-  background-color: #232E3F;
-  border-color: #232E3F;
-  color: #FFFFFF;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(18, 24, 34, 0.18);
-}
-
-.btn-accent {
-  background-color: var(--color-accent-primary);
-  color: #FFFFFF;
-  border-color: var(--color-accent-primary);
-}
-
-.btn-accent:hover {
-  background-color: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
-  color: #FFFFFF;
-  transform: translateY(-1px);
-}
-
-.btn-secondary {
-  background-color: var(--color-bg-surface);
-  color: var(--color-text-primary);
-  border-color: var(--color-border-default);
+  background-color: var(--color-ink);
+  color: var(--color-bg);
+  border-color: var(--color-ink);
   box-shadow: var(--shadow-sm);
 }
 
-.btn-secondary:hover {
-  background-color: var(--color-bg-subtle);
-  border-color: var(--color-border-strong);
-  color: var(--color-text-primary);
+.btn-primary:hover {
+  background-color: var(--color-ink-2);
+  border-color: var(--color-ink-2);
+  color: var(--color-bg);
   transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-accent {
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-accent:hover {
+  background-color: var(--color-accent-2);
+  border-color: var(--color-accent-2);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  border-color: var(--color-line);
+  box-shadow: var(--shadow-xs);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-surface-alt);
+  border-color: var(--color-line-strong);
+  color: var(--color-ink);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-ghost {
   background: transparent;
-  color: var(--color-text-secondary);
+  color: var(--color-ink-2);
   border-color: transparent;
   padding: 8px 14px;
 }
 
 .btn-ghost:hover {
-  background: var(--color-bg-subtle);
-  color: var(--color-text-primary);
+  background: var(--color-surface-alt);
+  color: var(--color-ink);
 }
 
 .btn-sm {
@@ -328,28 +452,29 @@ a:hover {
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 500;
-  padding: 4px 10px;
-  border-radius: 6px;
-  background-color: var(--color-bg-subtle);
-  color: var(--color-text-secondary);
-  border: 1px solid var(--color-border-subtle);
-  line-height: 1.2;
+  padding: 3px 9px;
+  border-radius: 5px;
+  background-color: var(--color-surface-alt);
+  color: var(--color-ink-2);
+  border: 1px solid var(--color-line);
+  line-height: 1.3;
+  letter-spacing: 0.01em;
 }
 
 .badge-accent {
-  background-color: var(--color-accent-subtle);
-  color: var(--color-accent-primary);
-  border-color: var(--color-accent-border);
+  background-color: var(--color-accent-bg);
+  color: var(--color-accent);
+  border-color: var(--color-accent-line);
 }
 
 .badge-purple {
-  background-color: var(--color-purple-light);
-  color: var(--color-purple-primary);
-  border-color: var(--color-purple-border);
+  background-color: var(--color-purple-bg);
+  color: var(--color-purple);
+  border-color: var(--color-purple-line);
 }
 
 .badge-dark {
@@ -360,23 +485,26 @@ a:hover {
 
 /* Cards & Panels */
 .card {
-  background-color: var(--color-bg-surface);
-  border: 1px solid var(--color-border-default);
-  border-radius: 12px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
   padding: 28px;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+  box-shadow: var(--shadow-xs);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease;
 }
 
 .card:hover {
   box-shadow: var(--shadow-md);
-  border-color: var(--color-border-strong);
+  border-color: var(--color-line-strong);
+  transform: translateY(-1px);
 }
 
 .card-elevated {
-  background-color: var(--color-bg-surface);
-  border: 1px solid var(--color-border-default);
-  border-radius: 14px;
+  background-color: var(--color-elevated);
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
   box-shadow: var(--shadow-md);
 }
 
@@ -385,27 +513,70 @@ a:hover {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
   margin: 24px 0;
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
+  font-size: 0.775rem;
 }
 
 .flow-step {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: var(--color-bg-surface);
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: 1px solid var(--color-border-default);
-  color: var(--color-text-primary);
+  gap: 7px;
+  background: var(--color-surface);
+  padding: 5px 11px;
+  border-radius: 5px;
+  border: 1px solid var(--color-line);
+  color: var(--color-ink);
   font-weight: 500;
 }
 
 .flow-arrow {
-  color: var(--color-accent-primary);
+  color: var(--color-accent);
   font-weight: 700;
+}
+
+/* ── Theme Toggle Button ─────────────────────────────────────── */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 7px;
+  background: transparent;
+  border: 1px solid var(--color-line);
+  color: var(--color-ink-2);
+  cursor: pointer;
+  transition: background-color 0.15s ease,
+              border-color 0.15s ease,
+              color 0.15s ease,
+              transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  background-color: var(--color-surface-alt);
+  border-color: var(--color-line-strong);
+  color: var(--color-ink);
+  transform: rotate(20deg);
+}
+
+.theme-toggle svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+  pointer-events: none;
+}
+
+/* Show correct icon per theme */
+:root:not([data-theme="dark"]) .icon-moon { display: none; }
+[data-theme="light"] .icon-moon { display: none; }
+[data-theme="dark"] .icon-sun { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .icon-sun  { display: none; }
+  :root:not([data-theme="light"]) .icon-moon { display: block; }
 }
 
 /* Grids & Utility Layouts */
