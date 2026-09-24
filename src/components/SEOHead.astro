@@ -1,0 +1,122 @@
+---
+import { profile } from '../data/profile';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  ogType?: 'website' | 'article';
+  ogImage?: string;
+  structuredData?: Record<string, any> | Array<Record<string, any>>;
+}
+
+const {
+  title,
+  description,
+  canonicalPath = '',
+  ogType = 'website',
+  ogImage = '/og/og-image.svg',
+  structuredData,
+} = Astro.props;
+
+const canonicalUrl = new URL(canonicalPath, Astro.site).href;
+const socialImageUrl = new URL(ogImage, Astro.site).href;
+
+// Base schema for Person & WebSite
+const basePersonSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${Astro.site}#person`,
+  "name": profile.name,
+  "givenName": profile.firstName,
+  "familyName": "Elshafie",
+  "jobTitle": profile.title,
+  "description": profile.positioningStatement,
+  "url": Astro.site?.toString(),
+  "email": `mailto:${profile.email}`,
+  "telephone": profile.phone,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "6 October City",
+    "addressRegion": "Giza",
+    "addressCountry": "Egypt"
+  },
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": profile.education.institution,
+    "department": profile.education.faculty
+  },
+  "knowsAbout": [
+    "Backend Engineering",
+    "Python",
+    "Django",
+    "Django REST Framework",
+    "Artificial Intelligence",
+    "LLM Workflows",
+    "Workflow Automation",
+    "OpenCV",
+    "Computer Vision",
+    "Digital Marketing",
+    "SEO"
+  ],
+  "sameAs": [
+    profile.linkedin,
+    profile.github
+  ]
+};
+
+const baseWebSiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${Astro.site}#website`,
+  "url": Astro.site?.toString(),
+  "name": `${profile.name} — ${profile.title}`,
+  "description": profile.positioningStatement,
+  "publisher": {
+    "@id": `${Astro.site}#person`
+  },
+  "inLanguage": "en-US"
+};
+
+const combinedSchema = structuredData
+  ? [basePersonSchema, baseWebSiteSchema, ...(Array.isArray(structuredData) ? structuredData : [structuredData])]
+  : [basePersonSchema, baseWebSiteSchema];
+---
+
+<!-- Core Technical & Identification Meta -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="generator" content={Astro.generator} />
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Page Title & Meta Description -->
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="author" content={profile.name} />
+<meta name="keywords" content="Backend Engineer, Backend & AI Engineer, AI Engineer, Python Engineer, LLM Engineer, AI Automation, RAG, Generative AI, Django backend development, Python backend development, API development, AI integrations, AI workflow automation, Cairo, Giza, Egypt" />
+<meta name="robots" content="index, follow" />
+
+<!-- Open Graph / Facebook / LinkedIn -->
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={socialImageUrl} />
+<meta property="og:site_name" content={`${profile.name} — ${profile.title}`} />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalUrl} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={socialImageUrl} />
+
+<!-- Google Fonts Preconnect & Font Loading -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(combinedSchema)} />

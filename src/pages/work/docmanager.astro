@@ -1,0 +1,896 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTASection from '../../components/CTASection.astro';
+import { projects } from '../../data/projects';
+import { profile } from '../../data/profile';
+
+const project = projects.find((p) => p.id === 'docmanager')!;
+
+const pageTitle = `${project.title} | ${project.subtitle} — ${profile.name}`;
+const pageDescription = `Technical case study of ${project.title}: A secure, hierarchical document management system with Django REST APIs, JWT authentication, RBAC, and immutable audit logs.`;
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": project.title,
+    "description": project.summary,
+    "programmingLanguage": "Python",
+    "author": {
+      "@type": "Person",
+      "name": profile.name
+    },
+    "codeRepository": project.links.github
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://abdulrahman-saeed-elshafie.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Selected Work",
+        "item": "https://abdulrahman-saeed-elshafie.com/work/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": project.title,
+        "item": `https://abdulrahman-saeed-elshafie.com/work/${project.slug}/`
+      }
+    ]
+  }
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalPath={`/work/${project.slug}/`} structuredData={structuredData}>
+  <!-- Case Study Hero -->
+  <header class="study-hero section-tight">
+    <div class="container">
+      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol class="breadcrumb-list">
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">/</li>
+          <li><a href="/work/">Selected Work</a></li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page">{project.title}</li>
+        </ol>
+      </nav>
+
+      <div class="hero-top">
+        <div class="hero-badges">
+          <span class="badge badge-accent">{project.category}</span>
+          <span class="badge badge-purple">{project.badge}</span>
+        </div>
+        <h1 class="hero-heading">{project.title}</h1>
+        <p class="hero-tagline">{project.tagline}</p>
+
+        <div class="hero-role-meta">
+          <div class="meta-item">
+            <span class="meta-label">ROLE:</span>
+            <span class="meta-value">{project.role}</span>
+          </div>
+          <div class="meta-divider"></div>
+          <div class="meta-item">
+            <span class="meta-label">FOCUS:</span>
+            <span class="meta-value">Django REST APIs · RBAC · Relational Schemas</span>
+          </div>
+          <div class="meta-divider"></div>
+          <div class="meta-item">
+            <span class="meta-label">SOURCE:</span>
+            <a href={project.links.github} target="_blank" rel="noopener noreferrer" class="meta-link">
+              GitHub Repository
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3.33334 8H12.6667M12.6667 8L8.00001 3.33333M12.6667 8L8.00001 12.6667" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Case Study Content -->
+  <div class="study-content-container container">
+    <div class="study-grid">
+      <!-- Main Content Column -->
+      <article class="study-main">
+        <!-- 01 The Problem -->
+        <section class="study-block" id="problem">
+          <div class="block-header">
+            <span class="block-num">01</span>
+            <h2 class="block-title">The Operational Problem</h2>
+          </div>
+          <p class="block-lead">{project.problem.context}</p>
+          <div class="friction-card">
+            <h3 class="friction-title">Core Security &amp; Workflow Friction Points:</h3>
+            <ul class="friction-list">
+              {project.problem.frictionPoints.map((point) => (
+                <li>{point}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <!-- 02 The Solution & Key Capabilities -->
+        <section class="study-block" id="solution">
+          <div class="block-header">
+            <span class="block-num">02</span>
+            <h2 class="block-title">The Solution &amp; System Capabilities</h2>
+          </div>
+          <p class="block-lead">{project.solution.overview}</p>
+          <div class="capabilities-grid">
+            {project.solution.keyCapabilities.map((cap) => (
+              <div class="capability-item">
+                <span class="cap-check" aria-hidden="true">✓</span>
+                <span class="cap-text">{cap}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- 03 System Architecture & How It Works -->
+        <section class="study-block" id="architecture">
+          <div class="block-header">
+            <span class="block-num">03</span>
+            <h2 class="block-title">System Architecture: Layered Security &amp; Data Flow</h2>
+          </div>
+          <p class="block-lead">{project.systemArchitecture.description}</p>
+          
+          <div class="architecture-flow-box">
+            <div class="arch-flow-header">
+              <span class="arch-flow-title">{project.systemArchitecture.title}</span>
+              <span class="arch-flow-pill">DRF &amp; POSTGRESQL ARCHITECTURE</span>
+            </div>
+
+            <div class="arch-flow-stages">
+              {project.systemArchitecture.stages.map((stage, idx) => (
+                <div class="flow-stage-card">
+                  <div class="stage-top">
+                    <span class="stage-step-badge">{stage.step}</span>
+                    <h3 class="stage-label">{stage.label}</h3>
+                  </div>
+                  <p class="stage-detail">{stage.detail}</p>
+                  {idx < project.systemArchitecture.stages.length - 1 && (
+                    <div class="stage-flow-indicator" aria-hidden="true">
+                      <span>↓</span>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <!-- 04 Personal Role & Engineering Scope -->
+        <section class="study-block" id="role">
+          <div class="block-header">
+            <span class="block-num">04</span>
+            <h2 class="block-title">My Personal Engineering Role</h2>
+          </div>
+          <p class="block-lead">{project.myRole.summary}</p>
+          <ul class="role-responsibilities">
+            {project.myRole.responsibilities.map((r) => (
+              <li>{r}</li>
+            ))}
+          </ul>
+        </section>
+
+        <!-- 05 Key Technical Decisions -->
+        <section class="study-block" id="technical-decisions">
+          <div class="block-header">
+            <span class="block-num">05</span>
+            <h2 class="block-title">Key Technical Decisions &amp; Data Model Trade-offs</h2>
+          </div>
+          <div class="decisions-list">
+            {project.technicalDecisions.map((td) => (
+              <div class="decision-card">
+                <h3 class="decision-name">{td.decision}</h3>
+                <div class="decision-body">
+                  <p><strong>Rationale:</strong> {td.rationale}</p>
+                  <p class="decision-outcome"><strong>Engineering Outcome:</strong> {td.outcome}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- 06 Challenges Overcome -->
+        <section class="study-block" id="challenges">
+          <div class="block-header">
+            <span class="block-num">06</span>
+            <h2 class="block-title">Engineering Challenges &amp; Data Integrity</h2>
+          </div>
+          <div class="challenges-grid">
+            {project.challenges.map((c) => (
+              <div class="challenge-item-card">
+                <div class="challenge-header">
+                  <span class="challenge-badge">CHALLENGE</span>
+                  <p class="challenge-text">{c.challenge}</p>
+                </div>
+                <div class="resolution-body">
+                  <span class="resolution-badge">RESOLUTION</span>
+                  <p class="resolution-text">{c.resolution}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- 07 Verified Outcome -->
+        <section class="study-block" id="outcome">
+          <div class="block-header">
+            <span class="block-num">07</span>
+            <h2 class="block-title">Verified Outcome &amp; System Capabilities</h2>
+          </div>
+          <div class="outcome-callout">
+            <p class="outcome-desc">{project.verifiedOutcome.description}</p>
+            <ul class="outcome-highlights">
+              {project.verifiedOutcome.highlights.map((h) => (
+                <li>{h}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      </article>
+
+      <!-- Sidebar Column: Stack & Metadata -->
+      <aside class="study-sidebar">
+        <div class="sidebar-sticky">
+          <!-- Stack Box -->
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Technologies Used</h3>
+            
+            <div class="stack-group">
+              <span class="stack-group-title">Backend Framework &amp; Core:</span>
+              <div class="stack-badges">
+                {project.stack.core.map((t) => (
+                  <span class="badge badge-accent">{t}</span>
+                ))}
+              </div>
+            </div>
+
+            <div class="stack-group">
+              <span class="stack-group-title">Security &amp; Auth:</span>
+              <div class="stack-badges">
+                {project.stack.backend.map((t) => (
+                  <span class="badge">{t}</span>
+                ))}
+              </div>
+            </div>
+
+            <div class="stack-group">
+              <span class="stack-group-title">Document Processing:</span>
+              <div class="stack-badges">
+                {project.stack.aiOrAutomation.map((t) => (
+                  <span class="badge badge-purple">{t}</span>
+                ))}
+              </div>
+            </div>
+
+            <div class="stack-group">
+              <span class="stack-group-title">Database &amp; Storage:</span>
+              <div class="stack-badges">
+                {project.stack.dataOrStorage.map((t) => (
+                  <span class="badge">{t}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- Links Box -->
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Project Resources</h3>
+            <div class="sidebar-links">
+              {project.links.github ? (
+                <a href={project.links.github} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="width: 100%;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                  </svg>
+                  <span>View Repository</span>
+                </a>
+              ) : (
+                <span class="placeholder-note">{project.links.githubPlaceholder}</span>
+              )}
+              <span class="sidebar-note">Full stack document backend with relational schema architecture and JWT security.</span>
+            </div>
+          </div>
+
+          <!-- Jump To Section -->
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Table of Contents</h3>
+            <ul class="toc-list">
+              <li><a href="#problem">01 · Operational Problem</a></li>
+              <li><a href="#solution">02 · Solution &amp; Capabilities</a></li>
+              <li><a href="#architecture">03 · System Architecture</a></li>
+              <li><a href="#role">04 · Personal Role</a></li>
+              <li><a href="#technical-decisions">05 · Technical Decisions</a></li>
+              <li><a href="#challenges">06 · Challenges &amp; Recovery</a></li>
+              <li><a href="#outcome">07 · Verified Outcome</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Contextual Case Study CTA -->
+  <CTASection
+    title="Need to design a secure, multi-tenant Django REST API?"
+    subtitle="Let's discuss how role-based permissions, relational schemas, and audit logging can protect your organizational data."
+    primaryCtaText="Start a conversation"
+  />
+</BaseLayout>
+
+<style>
+  .study-hero {
+    background-color: var(--color-bg-canvas);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .breadcrumb-nav {
+    margin-bottom: 24px;
+  }
+
+  .breadcrumb-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .breadcrumb-list a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  .breadcrumb-list a:hover {
+    color: var(--color-accent-primary);
+  }
+
+  .hero-badges {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .hero-heading {
+    font-size: clamp(2.25rem, 5vw, 3.25rem);
+    font-weight: 800;
+    margin: 0 0 10px;
+    color: var(--color-text-primary);
+  }
+
+  .hero-tagline {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    max-width: 760px;
+    margin: 0 0 24px;
+  }
+
+  .hero-role-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border-subtle);
+    font-size: 0.8125rem;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .meta-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+
+  .meta-value {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  .meta-divider {
+    width: 1px;
+    height: 12px;
+    background-color: var(--color-border-default);
+  }
+
+  .meta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--color-accent-primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* Content Grid */
+  .study-content-container {
+    padding-top: 56px;
+    padding-bottom: 72px;
+  }
+
+  .study-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 48px;
+  }
+
+  .study-main {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  .study-block {
+    scroll-margin-top: 100px;
+  }
+
+  .block-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    border-bottom: 2px solid var(--color-border-subtle);
+    padding-bottom: 10px;
+  }
+
+  .block-num {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-accent-primary);
+    background-color: var(--color-accent-subtle);
+    border: 1px solid var(--color-accent-border);
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+
+  .block-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-text-primary);
+  }
+
+  .block-lead {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin-bottom: 20px;
+  }
+
+  /* Friction Box */
+  .friction-card {
+    background-color: var(--color-bg-subtle);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .friction-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .friction-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  .friction-list li {
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .friction-list li::before {
+    content: "✕";
+    position: absolute;
+    left: 2px;
+    color: #DC2626;
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
+
+  /* Capabilities Grid */
+  .capabilities-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .capability-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.875rem;
+    color: var(--color-text-primary);
+  }
+
+  .cap-check {
+    color: var(--color-success);
+    font-weight: bold;
+  }
+
+  /* Architecture Box */
+  .architecture-flow-box {
+    background-color: var(--color-bg-dark);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 24px;
+    color: #FFFFFF;
+  }
+
+  .arch-flow-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .arch-flow-title {
+    font-size: 0.9375rem;
+    font-weight: 700;
+  }
+
+  .arch-flow-pill {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    background: rgba(245, 158, 11, 0.15);
+    color: #F59E0B;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  .arch-flow-stages {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .flow-stage-card {
+    background: var(--color-navy-surface);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 16px;
+    position: relative;
+  }
+
+  .stage-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  .stage-step-badge {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: #F59E0B;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .stage-label {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 0;
+  }
+
+  .stage-detail {
+    font-size: 0.8125rem;
+    color: #CBD5E1;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .stage-flow-indicator {
+    display: flex;
+    justify-content: center;
+    color: #64748B;
+    font-size: 1rem;
+    margin-top: 8px;
+  }
+
+  /* Role List */
+  .role-responsibilities {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+  }
+
+  .role-responsibilities li {
+    position: relative;
+    padding-left: 20px;
+    line-height: 1.5;
+  }
+
+  .role-responsibilities li::before {
+    content: "■";
+    position: absolute;
+    left: 2px;
+    color: var(--color-accent-primary);
+    font-size: 0.625rem;
+    top: 4px;
+  }
+
+  /* Decisions */
+  .decisions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .decision-card {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .decision-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 10px;
+  }
+
+  .decision-body {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .decision-outcome {
+    color: var(--color-accent-primary);
+  }
+
+  /* Challenges */
+  .challenges-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .challenge-item-card {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .challenge-header {
+    background-color: var(--color-bg-subtle);
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .challenge-badge {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: var(--color-accent-primary);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .challenge-text {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  .resolution-body {
+    padding: 14px 18px;
+  }
+
+  .resolution-badge {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: var(--color-success);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .resolution-text {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  /* Outcome Box */
+  .outcome-callout {
+    background-color: var(--color-success-bg);
+    border: 1px solid var(--color-success-border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .outcome-desc {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 16px;
+  }
+
+  .outcome-highlights {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  .outcome-highlights li {
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .outcome-highlights li::before {
+    content: "✓";
+    position: absolute;
+    left: 2px;
+    color: var(--color-success);
+    font-weight: bold;
+  }
+
+  /* Sidebar */
+  .study-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .sidebar-sticky {
+    position: sticky;
+    top: 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .sidebar-card {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .sidebar-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--color-border-subtle);
+    padding-bottom: 8px;
+    margin: 0;
+  }
+
+  .stack-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .stack-group-title {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+
+  .stack-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .sidebar-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sidebar-note {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
+  .placeholder-note {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent-primary);
+  }
+
+  .toc-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    font-size: 0.8125rem;
+  }
+
+  .toc-list a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .toc-list a:hover {
+    color: var(--color-accent-primary);
+  }
+
+  @media (max-width: 900px) {
+    .study-grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .study-sidebar {
+      order: 2;
+    }
+
+    .sidebar-sticky {
+      position: static;
+    }
+  }
+</style>

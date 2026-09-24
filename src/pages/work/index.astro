@@ -1,0 +1,151 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import CTASection from '../../components/CTASection.astro';
+import { projects } from '../../data/projects';
+import { profile } from '../../data/profile';
+
+const pageTitle = `Selected Work | ${profile.name} — Backend & AI Engineer`;
+const pageDescription = "Selected engineering case studies: AutoWA WhatsApp desktop automation, DocManager Django RESTful document platform, and Autowritey 11-stage LLM generation pipeline.";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://abdulrahman-saeed-elshafie.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Selected Work",
+      "item": "https://abdulrahman-saeed-elshafie.com/work/"
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalPath="/work/" structuredData={breadcrumbSchema}>
+  <div class="page-header section-tight">
+    <div class="container">
+      <!-- Breadcrumb Navigation -->
+      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol class="breadcrumb-list">
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page">Selected Work</li>
+        </ol>
+      </nav>
+
+      <div class="header-intro">
+        <span class="section-eyebrow">Engineering Portfolio &amp; Case Studies</span>
+        <h1 class="page-heading">Selected Technical Work</h1>
+        <p class="page-lead">
+          Every project featured here represents a concrete operational problem translated into backend architecture, reliable AI workflows, or automated execution pipelines. No hypothetical exercises or boilerplate templates.
+        </p>
+      </div>
+
+      <!-- Quick Category Filters -->
+      <div class="filter-strip">
+        <span class="filter-label">Focus Areas:</span>
+        <span class="badge badge-accent">Backend APIs &amp; RBAC</span>
+        <span class="badge badge-purple">LLM Chaining &amp; Grounding</span>
+        <span class="badge badge-dark">Computer Vision UI Automation</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section-tight section-alt">
+    <div class="container">
+      <div class="work-grid">
+        {projects.map((project) => (
+          <div class="work-item-wrapper">
+            <ProjectCard project={project} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contextual CTA -->
+  <CTASection
+    title="Have a similar backend or AI engineering challenge?"
+    subtitle="Let's review your operational workflow, access control requirements, or LLM pipeline constraints and discuss an architectural approach."
+  />
+</BaseLayout>
+
+<style>
+  .page-header {
+    background-color: var(--color-bg-canvas);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .breadcrumb-nav {
+    margin-bottom: 20px;
+  }
+
+  .breadcrumb-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .breadcrumb-list a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  .breadcrumb-list a:hover {
+    color: var(--color-accent-primary);
+  }
+
+  .header-intro {
+    max-width: 720px;
+    margin-bottom: 24px;
+  }
+
+  .page-heading {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    margin: 6px 0 16px;
+    color: var(--color-text-primary);
+  }
+
+  .page-lead {
+    font-size: 1.125rem;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .filter-strip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .filter-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+
+  .work-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    padding: 20px 0;
+  }
+</style>

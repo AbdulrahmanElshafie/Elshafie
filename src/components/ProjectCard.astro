@@ -1,0 +1,405 @@
+---
+import type { ProjectCaseStudy } from '../data/projects';
+
+interface Props {
+  project: ProjectCaseStudy;
+  featured?: boolean;
+}
+
+const { project, featured = false } = Astro.props;
+---
+
+<article class:list={["project-card", { "is-featured": featured }]} id={`project-${project.id}`}>
+  <header class="card-header">
+    <div class="header-tags">
+      <span class="badge badge-accent">{project.category}</span>
+      <span class="badge badge-purple">{project.badge}</span>
+    </div>
+    <div class="project-identity">
+      <h3 class="project-title">
+        <a href={`/work/${project.slug}/`} class="title-link">
+          {project.title}
+          <span class="title-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      </h3>
+      <p class="project-subtitle">{project.subtitle}</p>
+    </div>
+    <div class="project-role-badge">
+      <span class="role-label">Role:</span>
+      <span class="role-value">{project.role}</span>
+    </div>
+  </header>
+
+  <!-- Problem → System → Outcome Grid -->
+  <div class="case-study-body">
+    <!-- 01 The Problem -->
+    <div class="study-section section-problem">
+      <div class="study-label">
+        <span class="step-num">01</span>
+        <span>The Problem &amp; Friction</span>
+      </div>
+      <p class="study-text">{project.problem.context}</p>
+      <ul class="friction-bullets">
+        {project.problem.frictionPoints.slice(0, 2).map((point) => (
+          <li>{point}</li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- 02 The System Built -->
+    <div class="study-section section-system">
+      <div class="study-label">
+        <span class="step-num">02</span>
+        <span>The System Built</span>
+      </div>
+      <p class="study-text">{project.solution.overview}</p>
+      <div class="mini-architecture">
+        <span class="arch-heading">Key Architecture Pipeline:</span>
+        <div class="arch-steps">
+          {project.systemArchitecture.stages.map((stage, idx) => (
+            <div class="arch-step">
+              <span class="step-idx">{stage.step}</span>
+              <span class="step-txt">{stage.label}</span>
+              {idx < project.systemArchitecture.stages.length - 1 && (
+                <span class="step-sep" aria-hidden="true">&rarr;</span>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 Technical Challenge & Outcome -->
+    <div class="study-section section-outcome">
+      <div class="study-label">
+        <span class="step-num">03</span>
+        <span>Engineering Challenge &amp; Verified Result</span>
+      </div>
+      <div class="challenge-box">
+        <strong>Key Challenge:</strong> {project.challenges[0]?.challenge}
+      </div>
+      <div class="outcome-box">
+        <strong>Verified Outcome:</strong> {project.verifiedOutcome.description}
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer: Stack & Actions -->
+  <footer class="card-footer">
+    <div class="tech-stack">
+      <span class="stack-label">Stack:</span>
+      <div class="stack-tags">
+        {[...project.stack.core, ...project.stack.backend.slice(0, 2), ...project.stack.aiOrAutomation.slice(0, 2)].map((t) => (
+          <span class="stack-item">{t}</span>
+        ))}
+      </div>
+    </div>
+    <div class="card-actions">
+      <a href={`/work/${project.slug}/`} class="btn btn-secondary btn-sm">
+        <span>Explore Case Study</span>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3.33334 8H12.6667M12.6667 8L8.00001 3.33333M12.6667 8L8.00001 12.6667" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      {project.links.github && (
+        <a href={project.links.github} target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" aria-label={`View ${project.title} on GitHub`}>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+          <span>GitHub</span>
+        </a>
+      )}
+    </div>
+  </footer>
+</article>
+
+<style>
+  .project-card {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .project-card:hover {
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+
+  .card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .header-tags {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .project-identity {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .project-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .title-link {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .title-link:hover {
+    color: var(--color-accent-primary);
+  }
+
+  .title-arrow {
+    font-size: 1.25rem;
+    transition: transform 0.2s ease;
+  }
+
+  .title-link:hover .title-arrow {
+    transform: translateX(4px);
+  }
+
+  .project-subtitle {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .project-role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .role-label {
+    color: var(--color-accent-primary);
+    font-weight: 600;
+  }
+
+  .role-value {
+    color: var(--color-text-secondary);
+  }
+
+  /* Body */
+  .case-study-body {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: 24px;
+  }
+
+  .study-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .study-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    border-bottom: 1px solid var(--color-border-subtle);
+    padding-bottom: 6px;
+  }
+
+  .step-num {
+    background-color: var(--color-bg-subtle);
+    border: 1px solid var(--color-border-default);
+    color: var(--color-accent-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.625rem;
+    font-weight: 700;
+  }
+
+  .study-text {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .friction-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  .friction-bullets li {
+    position: relative;
+    padding-left: 16px;
+    line-height: 1.4;
+  }
+
+  .friction-bullets li::before {
+    content: "•";
+    position: absolute;
+    left: 4px;
+    color: var(--color-accent-primary);
+    font-weight: bold;
+  }
+
+  .mini-architecture {
+    background-color: var(--color-bg-subtle);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-top: 4px;
+  }
+
+  .arch-heading {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-text-muted);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .arch-steps {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+  }
+
+  .arch-step {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--color-bg-surface);
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--color-border-default);
+  }
+
+  .step-idx {
+    color: var(--color-accent-primary);
+    font-weight: 700;
+  }
+
+  .step-sep {
+    color: var(--color-text-muted);
+  }
+
+  .challenge-box, .outcome-box {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border-left: 3px solid;
+  }
+
+  .challenge-box {
+    background-color: var(--color-purple-light);
+    border-left-color: var(--color-purple-primary);
+    color: var(--color-text-primary);
+  }
+
+  .outcome-box {
+    background-color: var(--color-success-bg);
+    border-left-color: var(--color-success);
+    color: var(--color-text-primary);
+  }
+
+  /* Footer */
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border-subtle);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .tech-stack {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .stack-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+
+  .stack-tags {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .stack-item {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    background-color: var(--color-bg-subtle);
+    border: 1px solid var(--color-border-subtle);
+    color: var(--color-text-secondary);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  .card-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  @media (max-width: 960px) {
+    .case-study-body {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .card-footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .card-actions {
+      width: 100%;
+      justify-content: flex-start;
+    }
+  }
+</style>

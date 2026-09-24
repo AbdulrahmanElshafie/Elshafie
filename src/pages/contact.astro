@@ -1,0 +1,398 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../data/profile';
+
+const pageTitle = `Contact | ${profile.name} — Backend & AI Engineer`;
+const pageDescription = `Start a conversation with Abdulrahman Saeed Elshafie about backend engineering, Django APIs, AI workflows, or automation projects. Located in 6 October City, Giza, Egypt.`;
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://abdulrahman-saeed-elshafie.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Contact",
+      "item": "https://abdulrahman-saeed-elshafie.com/contact/"
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalPath="/contact/" structuredData={breadcrumbSchema}>
+  <div class="page-header section-tight">
+    <div class="container">
+      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol class="breadcrumb-list">
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page">Contact</li>
+        </ol>
+      </nav>
+
+      <div class="header-intro">
+        <span class="section-eyebrow">Direct Engagement &amp; Opportunities</span>
+        <h1 class="page-heading">Start a Conversation</h1>
+        <p class="page-lead">
+          Whether you are a recruiter evaluating role fit, a founder needing to translate an operational workflow into software, or a team looking for Django and AI engineering expertise, reach out directly.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <section class="section section-tight">
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Direct Communication Channels -->
+        <div class="channels-column">
+          <div class="channel-card email-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <div class="card-info">
+              <span class="channel-type">PRIMARY CHANNEL</span>
+              <h2 class="channel-heading">Email Directly</h2>
+              <p class="channel-desc">Best for detailed technical inquiries, hiring discussions, or project scopes.</p>
+              <a href={`mailto:${profile.email}?subject=Engineering%20Inquiry%20via%20Portfolio`} class="btn btn-accent btn-sm">
+                <span>Send Email</span>
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M3.33334 8H12.6667M12.6667 8L8.00001 3.33333M12.6667 8L8.00001 12.6667" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <span class="raw-value">{profile.email}</span>
+            </div>
+          </div>
+
+          <div class="channel-card linkedin-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </div>
+            <div class="card-info">
+              <span class="channel-type">PROFESSIONAL NETWORK</span>
+              <h2 class="channel-heading">Connect on LinkedIn</h2>
+              <p class="channel-desc">For recruitment outreach, professional connections, and rapid messaging.</p>
+              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                <span>View LinkedIn Profile</span>
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M3.33334 8H12.6667M12.6667 8L8.00001 3.33333M12.6667 8L8.00001 12.6667" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="channel-card phone-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
+            <div class="card-info">
+              <span class="channel-type">DIRECT CALL</span>
+              <h2 class="channel-heading">Direct Phone / WhatsApp</h2>
+              <p class="channel-desc">Available during Cairo / UTC+2 business hours.</p>
+              <a href={`tel:${profile.phone.replace(/\s+/g, '')}`} class="btn btn-secondary btn-sm">
+                <span>{profile.phone}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Geographic & Verification Information -->
+        <div class="context-column">
+          <div class="info-card">
+            <h3 class="info-card-title">Professional Profile &amp; Location</h3>
+            
+            <div class="info-row">
+              <span class="info-label">Full Name:</span>
+              <span class="info-value">{profile.name}</span>
+            </div>
+
+            <div class="info-row">
+              <span class="info-label">Current Role:</span>
+              <span class="info-value">{profile.title}</span>
+            </div>
+
+            <div class="info-row">
+              <span class="info-label">Location:</span>
+              <span class="info-value">{profile.location}, {profile.country}</span>
+            </div>
+
+            <div class="info-row">
+              <span class="info-label">Timezone:</span>
+              <span class="info-value">EET / Cairo (UTC+2)</span>
+            </div>
+
+            <div class="info-row">
+              <span class="info-label">GitHub:</span>
+              <a href={profile.github} target="_blank" rel="noopener noreferrer" class="info-link">
+                github.com/AbdulrahmanElshafie
+              </a>
+            </div>
+          </div>
+
+          <div class="info-card inquiry-helper-card">
+            <h3 class="info-card-title">Project Inquiry Checklist</h3>
+            <p class="helper-desc">
+              When reaching out about a project or collaboration, sharing these points accelerates our architectural discussion:
+            </p>
+            <ul class="helper-list">
+              <li><strong>The operational problem:</strong> What workflow is currently manual, slow, or broken?</li>
+              <li><strong>Current stack:</strong> Are there existing Django, Python, or relational databases in place?</li>
+              <li><strong>Desired capabilities:</strong> Backend APIs, AI/LLM chaining, or computer vision automation?</li>
+              <li><strong>Timeline &amp; constraints:</strong> Target milestones or deployment environments.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    background-color: var(--color-bg-canvas);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .breadcrumb-nav {
+    margin-bottom: 20px;
+  }
+
+  .breadcrumb-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .breadcrumb-list a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  .breadcrumb-list a:hover {
+    color: var(--color-accent-primary);
+  }
+
+  .header-intro {
+    max-width: 760px;
+    margin-bottom: 24px;
+  }
+
+  .page-heading {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    margin: 6px 0 16px;
+    color: var(--color-text-primary);
+  }
+
+  .page-lead {
+    font-size: 1.125rem;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  /* Contact Grid */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 36px;
+  }
+
+  .channels-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .channel-card {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: 14px;
+    padding: 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .channel-card:hover {
+    border-color: var(--color-border-strong);
+    transform: translateY(-2px);
+  }
+
+  .email-card {
+    border-color: var(--color-accent-border);
+    background-color: var(--color-accent-subtle);
+  }
+
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent-primary);
+    flex-shrink: 0;
+  }
+
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex-grow: 1;
+  }
+
+  .channel-type {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-accent-primary);
+  }
+
+  .channel-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-text-primary);
+  }
+
+  .channel-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin: 0 0 10px;
+    line-height: 1.5;
+  }
+
+  .raw-value {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin-top: 6px;
+  }
+
+  /* Context Column */
+  .context-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .info-card {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: 14px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .info-card-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--color-border-subtle);
+    padding-bottom: 8px;
+    margin: 0 0 4px;
+  }
+
+  .info-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 0.875rem;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--color-border-subtle);
+  }
+
+  .info-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .info-label {
+    color: var(--color-text-muted);
+    font-size: 0.8125rem;
+  }
+
+  .info-value {
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .info-link {
+    color: var(--color-accent-primary);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .info-link:hover {
+    text-decoration: underline;
+  }
+
+  .helper-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .helper-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+  }
+
+  .helper-list li {
+    position: relative;
+    padding-left: 18px;
+    line-height: 1.5;
+  }
+
+  .helper-list li::before {
+    content: "■";
+    position: absolute;
+    left: 2px;
+    color: var(--color-accent-primary);
+    font-size: 0.5rem;
+    top: 5px;
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

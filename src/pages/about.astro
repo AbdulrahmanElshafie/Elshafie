@@ -1,0 +1,527 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ExperienceCard from '../components/ExperienceCard.astro';
+import CTASection from '../components/CTASection.astro';
+import { profile } from '../data/profile';
+import { experiences } from '../data/experience';
+
+const pageTitle = `About & Background | ${profile.name} — Backend & AI Engineer`;
+const pageDescription = "Background, engineering philosophy, and career track record of Abdulrahman Saeed Elshafie. B.Sc. in AI from Cairo University, combining backend APIs with digital marketing thinking.";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://abdulrahman-saeed-elshafie.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "About",
+      "item": "https://abdulrahman-saeed-elshafie.com/about/"
+    }
+  ]
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalPath="/about/" structuredData={breadcrumbSchema}>
+  <div class="page-header section-tight">
+    <div class="container">
+      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <ol class="breadcrumb-list">
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page">About</li>
+        </ol>
+      </nav>
+
+      <div class="header-intro">
+        <span class="section-eyebrow">Professional Background &amp; Philosophy</span>
+        <h1 class="page-heading">Engineering Mindset Grounded in Business Reality</h1>
+        <p class="page-lead">
+          I am a Backend &amp; AI Engineer who began in digital marketing and user acquisition. That dual foundation shapes every line of backend architecture, API contract, and AI pipeline I build today.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Narrative Section -->
+  <section class="section section-tight">
+    <div class="container">
+      <div class="story-grid">
+        <!-- Story Column -->
+        <div class="story-col">
+          <div class="narrative-block">
+            <h2 class="narrative-heading">The Dual Trajectory</h2>
+            <p>
+              Many software engineers learn to build before they understand why products succeed or fail in the real world. My path developed from both sides: exploring algorithmic foundations while actively driving organic growth, SEO strategies, and conversion funnels.
+            </p>
+            <p>
+              At <strong>ViciTech</strong>, I optimized Google Play listings to capture the #1 ranking for our primary search keyword, grew organic audiences, and drove hundreds of application downloads within weeks. At <strong>Techmart</strong>, I built conversion-tracked landing pages with Google Analytics to analyze user behavior at every stage of the funnel.
+            </p>
+            <p>
+              Those experiences proved that software isn't just about passing tests—it's about removing operational friction and helping users accomplish their goals without hesitation.
+            </p>
+          </div>
+
+          <div class="narrative-block">
+            <h2 class="narrative-heading">Why Marketing Makes Me a Better Backend Engineer</h2>
+            <p>
+              When I design a Django REST API, structure PostgreSQL tables, or build an 11-stage LLM generation pipeline, I don't look at tickets in isolation. I ask:
+            </p>
+            <ul class="story-points">
+              <li><strong>What business friction does this remove?</strong> Avoiding architectural over-engineering when a simpler, resilient pipeline delivers the exact operational outcome.</li>
+              <li><strong>How will the client consumer or user interact with this?</strong> Structuring intuitive payloads, helpful error messages, and robust validation.</li>
+              <li><strong>How will the system handle failure in production?</strong> Designing self-healing session checkpoints and fallback states so work is never lost.</li>
+            </ul>
+          </div>
+
+          <div class="narrative-block">
+            <h2 class="narrative-heading">Technical Focus</h2>
+            <p>
+              My day-to-day focus centers on:
+            </p>
+            <div class="focus-cards">
+              <div class="focus-card">
+                <span class="focus-icon">⚡</span>
+                <div class="focus-info">
+                  <strong>Backend &amp; API Architecture</strong>
+                  <span>Django, Django REST Framework, PostgreSQL, relational modeling, JWT authentication, and fine-grained RBAC.</span>
+                </div>
+              </div>
+              <div class="focus-card">
+                <span class="focus-icon">🧠</span>
+                <div class="focus-info">
+                  <strong>Production AI &amp; LLM Pipelines</strong>
+                  <span>Decomposed multi-stage generation, few-shot style profiling, self-correction loops, and live SerpAPI fact verification.</span>
+                </div>
+              </div>
+              <div class="focus-card">
+                <span class="focus-icon">🔄</span>
+                <div class="focus-info">
+                  <strong>Operational Automation &amp; Vision</strong>
+                  <span>Fault-tolerant batching engines, OpenCV computer vision UI automation, session recovery, and monitoring telemetry.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar: Education, Certifications & Resume -->
+        <aside class="story-aside">
+          <!-- Resume Box -->
+          <div class="aside-card resume-card">
+            <h3 class="aside-title">Official Resume</h3>
+            <p class="aside-desc">
+              Download the comprehensive resume detailing verified engineering experience, education, and credentials.
+            </p>
+            <a href={profile.resumePlaceholder} class="btn btn-primary" download="Resume-Abdulrahman-Elshafie.pdf">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Download Resume (PDF)</span>
+            </a>
+            <span class="resume-note">[Verified PDF format · Authoritative source of record]</span>
+          </div>
+
+          <!-- Education Box -->
+          <div class="aside-card" id="education">
+            <h3 class="aside-title">Formal Education</h3>
+            <div class="edu-item">
+              <span class="edu-degree">{profile.education.degree}</span>
+              <span class="edu-school">{profile.education.institution}</span>
+              <span class="edu-faculty">{profile.education.faculty}</span>
+              <span class="edu-period badge badge-accent">{profile.education.period}</span>
+              <p class="edu-desc">{profile.education.field}</p>
+            </div>
+          </div>
+
+          <!-- Certifications Box -->
+          <div class="aside-card">
+            <h3 class="aside-title">Verified Certifications</h3>
+            <div class="certs-list">
+              {profile.certifications.map((cert) => (
+                <div class="cert-item">
+                  <div class="cert-header">
+                    <span class="cert-name">{cert.name}</span>
+                    <span class="cert-issuer badge">{cert.issuer}</span>
+                  </div>
+                  {cert.topics && (
+                    <div class="cert-topics">
+                      {cert.topics.map((t) => (
+                        <span class="topic-tag">{t}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Location & Details -->
+          <div class="aside-card">
+            <h3 class="aside-title">Location &amp; Work Terms</h3>
+            <ul class="details-list">
+              <li>
+                <span class="dt-label">Base Location:</span>
+                <span class="dt-val">{profile.location}, {profile.country}</span>
+              </li>
+              <li>
+                <span class="dt-label">Engagement:</span>
+                <span class="dt-val">Full-time, Contract, Technical Advisory</span>
+              </li>
+              <li>
+                <span class="dt-label">Working Modes:</span>
+                <span class="dt-val">Hybrid (Cairo/Giza) or Fully Remote</span>
+              </li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Full Experience Timeline -->
+  <section class="section section-alt" id="experience">
+    <div class="container container-narrow">
+      <div class="section-header">
+        <span class="section-eyebrow">Professional History</span>
+        <h2 class="section-title">Career Track Record</h2>
+        <p class="section-subtitle">
+          Detailed timeline of roles, verified contributions, and measurable engineering outcomes.
+        </p>
+      </div>
+
+      <div class="experience-timeline">
+        {experiences.map((exp) => (
+          <ExperienceCard experience={exp} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contextual CTA -->
+  <CTASection
+    title="Ready to discuss an engineering role or technical project?"
+    subtitle="Let's connect on LinkedIn, schedule a consultation, or review how my backend and AI experience fits your technical needs."
+  />
+</BaseLayout>
+
+<style>
+  .page-header {
+    background-color: var(--color-bg-canvas);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .breadcrumb-nav {
+    margin-bottom: 20px;
+  }
+
+  .breadcrumb-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .breadcrumb-list a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  .breadcrumb-list a:hover {
+    color: var(--color-accent-primary);
+  }
+
+  .header-intro {
+    max-width: 760px;
+    margin-bottom: 24px;
+  }
+
+  .page-heading {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    margin: 6px 0 16px;
+    color: var(--color-text-primary);
+  }
+
+  .page-lead {
+    font-size: 1.125rem;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  /* Story Grid */
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 48px;
+  }
+
+  .story-col {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .narrative-block {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .narrative-heading {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+    border-bottom: 2px solid var(--color-border-subtle);
+    padding-bottom: 8px;
+  }
+
+  .narrative-block p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .story-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 4px 0 0;
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+  }
+
+  .story-points li {
+    position: relative;
+    padding-left: 20px;
+    line-height: 1.6;
+  }
+
+  .story-points li::before {
+    content: "■";
+    position: absolute;
+    left: 2px;
+    color: var(--color-accent-primary);
+    font-size: 0.625rem;
+    top: 5px;
+  }
+
+  .focus-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 6px;
+  }
+
+  .focus-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .focus-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .focus-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  .focus-info strong {
+    color: var(--color-text-primary);
+  }
+
+  /* Aside */
+  .story-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .aside-card {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .resume-card {
+    background-color: var(--color-bg-subtle);
+    border-color: var(--color-border-strong);
+  }
+
+  .aside-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--color-border-subtle);
+    padding-bottom: 8px;
+    margin: 0;
+  }
+
+  .aside-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .resume-note {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-text-muted);
+  }
+
+  .edu-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .edu-degree {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+  }
+
+  .edu-school {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-accent-primary);
+  }
+
+  .edu-faculty {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  .edu-period {
+    width: fit-content;
+    margin: 4px 0;
+  }
+
+  .edu-desc {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+    margin: 4px 0 0;
+  }
+
+  .certs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .cert-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--color-border-subtle);
+  }
+
+  .cert-item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .cert-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .cert-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.3;
+  }
+
+  .cert-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .topic-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    background-color: var(--color-bg-subtle);
+    color: var(--color-text-muted);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .details-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    font-size: 0.8125rem;
+  }
+
+  .details-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .dt-label {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+  }
+
+  .dt-val {
+    color: var(--color-text-primary);
+    font-weight: 500;
+  }
+
+  @media (max-width: 900px) {
+    .story-grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .story-aside {
+      order: 2;
+    }
+  }
+</style>

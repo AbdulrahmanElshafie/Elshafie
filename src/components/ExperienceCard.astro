@@ -1,0 +1,301 @@
+---
+import type { ExperienceItem } from '../data/experience';
+
+interface Props {
+  experience: ExperienceItem;
+}
+
+const { experience } = Astro.props;
+---
+
+<div class:list={["experience-card", { "is-dominant": experience.isDominant }]} id={`exp-${experience.id}`}>
+  <div class="exp-timeline-marker" aria-hidden="true">
+    <div class="marker-dot"></div>
+    <div class="marker-line"></div>
+  </div>
+
+  <div class="exp-content">
+    <div class="exp-header">
+      <div class="exp-meta">
+        <span class="badge badge-accent">{experience.period}</span>
+        <span class="badge badge-dark">{experience.workType}</span>
+        <span class="exp-category">{experience.category}</span>
+      </div>
+      <div class="exp-titles">
+        <h3 class="exp-role">{experience.role}</h3>
+        <div class="exp-company-line">
+          <span class="exp-company">{experience.company}</span>
+          <span class="sep">·</span>
+          <span class="exp-location">{experience.location}</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="exp-summary">{experience.summary}</p>
+
+    <!-- Verified Achievements -->
+    <div class="exp-achievements">
+      <h4 class="achievements-heading">Verified Technical Scope &amp; Outcomes:</h4>
+      <ul class="achievements-list">
+        {experience.achievements.map((ach) => (
+          <li>{ach}</li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Metrics Callout (when verified) -->
+    {experience.metrics && experience.metrics.length > 0 && (
+      <div class="exp-metrics-grid">
+        {experience.metrics.map((m) => (
+          <div class="metric-card">
+            <span class="metric-val">{m.value}</span>
+            <span class="metric-name">{m.label}</span>
+            <span class="metric-note">{m.note}</span>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <!-- Skills Badges -->
+    <div class="exp-skills">
+      {experience.skills.map((s) => (
+        <span class="skill-tag">{s}</span>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .experience-card {
+    display: flex;
+    gap: 24px;
+    position: relative;
+    padding-bottom: 40px;
+  }
+
+  .experience-card:last-child {
+    padding-bottom: 0;
+  }
+
+  /* Marker */
+  .exp-timeline-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 20px;
+  }
+
+  .marker-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: var(--color-bg-surface);
+    border: 3px solid var(--color-accent-primary);
+    box-shadow: 0 0 0 4px var(--color-bg-canvas);
+    z-index: 2;
+  }
+
+  .is-dominant .marker-dot {
+    background-color: var(--color-accent-primary);
+    border-color: #FFFFFF;
+    box-shadow: 0 0 0 4px var(--color-accent-border);
+  }
+
+  .marker-line {
+    width: 2px;
+    flex-grow: 1;
+    background-color: var(--color-border-default);
+    margin-top: 6px;
+  }
+
+  .experience-card:last-child .marker-line {
+    display: none;
+  }
+
+  /* Content */
+  .exp-content {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: 14px;
+    padding: 28px;
+    flex-grow: 1;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .is-dominant .exp-content {
+    border-color: var(--color-border-strong);
+    background-color: #FFFFFF;
+    box-shadow: var(--shadow-md);
+  }
+
+  .exp-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .exp-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .exp-category {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  .exp-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .exp-role {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-text-primary);
+  }
+
+  .exp-company-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+  }
+
+  .exp-company {
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .sep {
+    color: var(--color-text-subtle);
+  }
+
+  .exp-location {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  .exp-summary {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin-bottom: 20px;
+  }
+
+  /* Achievements */
+  .exp-achievements {
+    margin-bottom: 20px;
+  }
+
+  .achievements-heading {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .achievements-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .achievements-list li {
+    position: relative;
+    padding-left: 18px;
+    line-height: 1.5;
+  }
+
+  .achievements-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-primary);
+    font-weight: 700;
+  }
+
+  /* Metrics Grid */
+  .exp-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .metric-card {
+    background-color: var(--color-bg-subtle);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 8px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .metric-val {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-accent-primary);
+  }
+
+  .metric-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .metric-note {
+    font-size: 0.6875rem;
+    color: var(--color-text-muted);
+    line-height: 1.3;
+  }
+
+  /* Skills */
+  .exp-skills {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .skill-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    background-color: var(--color-bg-subtle);
+    color: var(--color-text-secondary);
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  @media (max-width: 600px) {
+    .experience-card {
+      gap: 14px;
+    }
+
+    .exp-content {
+      padding: 20px;
+    }
+  }
+</style>

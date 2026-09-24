@@ -1,0 +1,152 @@
+---
+import type { SkillCluster } from '../data/skills';
+
+interface Props {
+  cluster: SkillCluster;
+}
+
+const { cluster } = Astro.props;
+---
+
+<div class="skill-cluster-card">
+  <div class="cluster-header">
+    <h3 class="cluster-title">{cluster.title}</h3>
+    <p class="cluster-tagline">{cluster.tagline}</p>
+  </div>
+
+  <ul class="skills-list">
+    {cluster.skills.map((skill) => (
+      <li class="skill-row">
+        <div class="skill-info">
+          <span class="skill-bullet" aria-hidden="true">■</span>
+          <span class="skill-name">{skill.name}</span>
+        </div>
+        <div class="skill-evidence">
+          {skill.evidenceProject ? (
+            <a href={skill.evidenceProject.url} class="evidence-link">
+              <span>Verified in {skill.evidenceProject.title}</span>
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3.33334 8H12.6667M12.6667 8L8.00001 3.33333M12.6667 8L8.00001 12.6667" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          ) : (
+            <span class="evidence-text">{skill.verifiedIn}</span>
+          )}
+        </div>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .skill-cluster-card {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .skill-cluster-card:hover {
+    border-color: var(--color-border-strong);
+    transform: translateY(-2px);
+  }
+
+  .cluster-header {
+    border-bottom: 1px solid var(--color-border-subtle);
+    padding-bottom: 16px;
+  }
+
+  .cluster-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 6px;
+    color: var(--color-text-primary);
+  }
+
+  .cluster-tagline {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .skills-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0;
+  }
+
+  .skill-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 0.875rem;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--color-border-subtle);
+  }
+
+  .skill-row:last-child {
+    border-bottom: none;
+  }
+
+  .skill-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .skill-bullet {
+    color: var(--color-accent-primary);
+    font-size: 0.5rem;
+  }
+
+  .skill-evidence {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-align: right;
+  }
+
+  .evidence-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--color-accent-primary);
+    background-color: var(--color-accent-subtle);
+    border: 1px solid var(--color-accent-border);
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+  }
+
+  .evidence-link:hover {
+    background-color: var(--color-accent-light);
+    color: var(--color-accent-hover);
+  }
+
+  .evidence-text {
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 600px) {
+    .skill-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
+    .skill-evidence {
+      text-align: left;
+    }
+  }
+</style>

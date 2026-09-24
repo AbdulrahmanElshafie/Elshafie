@@ -1,0 +1,657 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SystemDiagram from '../components/SystemDiagram.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ExperienceCard from '../components/ExperienceCard.astro';
+import SkillCluster from '../components/SkillCluster.astro';
+import CTASection from '../components/CTASection.astro';
+import { profile } from '../data/profile';
+import { projects } from '../data/projects';
+import { experiences } from '../data/experience';
+import { skillClusters } from '../data/skills';
+
+const pageTitle = `${profile.name} | Backend & AI Engineer`;
+const pageDescription = "Backend & AI Engineer with a digital marketing background. Turning user needs into Django APIs, intelligent LLM pipelines, and resilient workflow automation in Cairo & Giza, Egypt.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <!-- Section 1: Hero -->
+  <section class="hero-section section">
+    <div class="container hero-container">
+      <div class="hero-content">
+        <!-- Eyebrow Identity Badge -->
+        <div class="hero-badge">
+          <span class="badge-pulse"></span>
+          <span class="hero-badge-text">Backend &amp; AI Engineer · Systems &amp; Automation</span>
+        </div>
+
+        <!-- Main Headline -->
+        <h1 class="hero-title">
+          I build backend systems and AI workflows around <span class="text-accent">real business problems.</span>
+        </h1>
+
+        <!-- Supporting Value Proposition -->
+        <p class="hero-lead">
+          Combining backend engineering with digital marketing and user acquisition thinking. I translate operational friction into production-ready Django APIs, structured LLM pipelines, and computer-vision automation that actually deliver business outcomes.
+        </p>
+
+        <!-- Primary & Secondary CTAs -->
+        <div class="hero-actions">
+          <a href="#selected-work" class="btn btn-primary">
+            <span>View selected work</span>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M8 3.33334V12.6667M8 12.6667L12.6667 8.00001M8 12.6667L3.33333 8.00001" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="/contact/" class="btn btn-secondary">
+            <span>Start a conversation</span>
+          </a>
+        </div>
+
+        <!-- Subtle Supporting Links -->
+        <div class="hero-meta-links">
+          <a href={profile.github} target="_blank" rel="noopener noreferrer" class="meta-link">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+            <span>GitHub Profile</span>
+          </a>
+          <span class="meta-dot">·</span>
+          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="meta-link">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+          <span class="meta-dot">·</span>
+          <a href="/about/#education" class="meta-link">
+            <span class="degree-tag">B.Sc. AI · Cairo Univ</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Visual: Restrained Architecture Flow -->
+      <div class="hero-visual">
+        <SystemDiagram />
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Differentiation Pillars -->
+  <section class="section section-alt" id="approach">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Strategic Differentiation</span>
+        <h2 class="section-title">What makes my approach different?</h2>
+        <p class="section-subtitle">
+          Most developers start with code. Having worked in digital marketing, user acquisition, and backend architecture, I look at the complete operational reality before writing a line of code.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <!-- Pillar 1 -->
+        <div class="card pillar-card">
+          <div class="pillar-num">01</div>
+          <h3 class="pillar-title">Start With the Problem</h3>
+          <p class="pillar-desc">
+            Understand user friction, acquisition bottlenecks, or workflow overhead before picking technical tools. Prevent building complex software for the wrong operational objective.
+          </p>
+          <div class="pillar-evidence">
+            <span class="evidence-tag">Evidence:</span>
+            <span>ViciTech &amp; Techmart SEO, conversion-focused funnel analytics</span>
+          </div>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="card pillar-card">
+          <div class="pillar-num">02</div>
+          <h3 class="pillar-title">Build the System</h3>
+          <p class="pillar-desc">
+            Architect reliable Django REST APIs, relational schemas, AI chaining pipelines, and desktop automation layers with atomic error boundaries and state checkpointing.
+          </p>
+          <div class="pillar-evidence">
+            <span class="evidence-tag">Evidence:</span>
+            <span>DocManager RBAC APIs, AutoWA CV engine, Soda Marketing AI</span>
+          </div>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="card pillar-card">
+          <div class="pillar-num">03</div>
+          <h3 class="pillar-title">Think About the Outcome</h3>
+          <p class="pillar-desc">
+            Evaluate systems by reliability, adoption, and friction reduction: zero-duplicate crash recovery, grounded factual outputs, and automated multi-account scheduling.
+          </p>
+          <div class="pillar-evidence">
+            <span class="evidence-tag">Evidence:</span>
+            <span>Autowritey SerpAPI fact verification, AutoWA session recovery</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Engineering + Marketing Bridge -->
+  <section class="section">
+    <div class="container">
+      <div class="bridge-card">
+        <div class="bridge-header">
+          <span class="bridge-eyebrow">The Dual Discipline Perspective</span>
+          <h2 class="bridge-title">Bridging Engineering Rigor with Marketing Reality</h2>
+        </div>
+
+        <div class="bridge-grid">
+          <div class="bridge-col">
+            <div class="bridge-col-header">
+              <span class="bridge-icon">⚙️</span>
+              <h3 class="bridge-col-title">Engineering asks:</h3>
+            </div>
+            <p class="bridge-question">"How do we build this reliably, securely, and scalably?"</p>
+            <p class="bridge-col-detail">
+              Focuses on API contracts, database transaction safety, stateless JWT authentication, exception handling, OpenCV visual coordinate precision, and pipeline state machines.
+            </p>
+          </div>
+
+          <div class="bridge-divider-col">
+            <div class="bridge-center-badge">START WITH BOTH</div>
+          </div>
+
+          <div class="bridge-col">
+            <div class="bridge-col-header">
+              <span class="bridge-icon">🎯</span>
+              <h3 class="bridge-col-title">Marketing asks:</h3>
+            </div>
+            <p class="bridge-question">"Why does the user need it, and what outcome are we creating?"</p>
+            <p class="bridge-col-detail">
+              Focuses on operational friction, acquisition funnels, brand tone fidelity, search intent, audience engagement, conversion tracking, and whether anyone will actually adopt it.
+            </p>
+          </div>
+        </div>
+
+        <div class="bridge-footer">
+          <p class="bridge-conclusion">
+            <strong>The Result:</strong> Software designed to survive real user workflows. I don't build isolated tech demos; I engineer backend architectures and AI automations that directly eliminate operational overhead.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Selected Work -->
+  <section class="section section-alt" id="selected-work">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-header-row">
+          <div>
+            <span class="section-eyebrow">Case Studies &amp; Evidence</span>
+            <h2 class="section-title">Selected Engineering Work</h2>
+            <p class="section-subtitle">
+              Detailed case studies demonstrating how problem framing translates into backend APIs, automation engines, and reliable AI pipelines.
+            </p>
+          </div>
+          <a href="/work/" class="btn btn-secondary btn-sm header-cta-btn">
+            <span>View All Projects</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3.33334 8H12.6667M12.6667 8L8.00001 3.33333M12.6667 8L8.00001 12.6667" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="projects-list">
+        {projects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Experience Section -->
+  <section class="section" id="experience">
+    <div class="container container-narrow">
+      <div class="section-header">
+        <span class="section-eyebrow">Track Record &amp; Timeline</span>
+        <h2 class="section-title">Professional Experience</h2>
+        <p class="section-subtitle">
+          Progressive technical impact spanning production AI pipelines, Django backend architecture, machine learning evaluations, and digital growth.
+        </p>
+      </div>
+
+      <div class="experience-timeline">
+        {experiences.map((exp) => (
+          <ExperienceCard experience={exp} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Capabilities Section -->
+  <section class="section section-alt" id="capabilities">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Technical Competencies</span>
+        <h2 class="section-title">Capabilities Grounded in Project Evidence</h2>
+        <p class="section-subtitle">
+          No fake percentage bars or buzzword lists. Every competency is tied directly to verified implementations in production or architecture projects.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        {skillClusters.map((cluster) => (
+          <SkillCluster cluster={cluster} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: How I Work -->
+  <section class="section" id="process">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Operational Methodology</span>
+        <h2 class="section-title">How I Approach Engineering Problems</h2>
+        <p class="section-subtitle">
+          A disciplined 5-stage lifecycle ensuring technical decisions solve real business problems without unnecessary overhead.
+        </p>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-card">
+          <span class="process-step">01</span>
+          <h3 class="process-title">Understand</h3>
+          <p class="process-desc">
+            Clarify the core user need, operational constraints, friction points, and measurable outcome before discussing tech stacks.
+          </p>
+        </div>
+
+        <div class="process-card">
+          <span class="process-step">02</span>
+          <h3 class="process-title">Design</h3>
+          <p class="process-desc">
+            Formulate API contracts, database schemas, state machines, and AI pipeline bounds to enforce modular service boundaries.
+          </p>
+        </div>
+
+        <div class="process-card">
+          <span class="process-step">03</span>
+          <h3 class="process-title">Build</h3>
+          <p class="process-desc">
+            Implement production-grade Django REST APIs, LLM chaining steps, OpenCV automation routines, and relational migrations.
+          </p>
+        </div>
+
+        <div class="process-card">
+          <span class="process-step">04</span>
+          <h3 class="process-title">Refine</h3>
+          <p class="process-desc">
+            Harden edge cases: build checkpoint recovery, self-correction loops, query optimizations, and live telemetry tracking.
+          </p>
+        </div>
+
+        <div class="process-card">
+          <span class="process-step">05</span>
+          <h3 class="process-title">Measure</h3>
+          <p class="process-desc">
+            Evaluate adoption, latency, delivery reliability, and business impact against the original operational goal.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: Final CTA -->
+  <CTASection />
+</BaseLayout>
+
+<style>
+  /* Hero Styles */
+  .hero-section {
+    padding-top: clamp(40px, 6vw, 72px);
+    padding-bottom: clamp(60px, 8vw, 96px);
+  }
+
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1.15fr 0.95fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--color-bg-subtle);
+    border: 1px solid var(--color-border-default);
+    padding: 6px 14px;
+    border-radius: 20px;
+    width: fit-content;
+  }
+
+  .badge-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-accent-primary);
+  }
+
+  .hero-badge-text {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .hero-title {
+    font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+    font-weight: 800;
+    line-height: 1.18;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  .text-accent {
+    color: var(--color-accent-primary);
+  }
+
+  .hero-lead {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin: 0;
+    max-width: 600px;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+
+  .hero-meta-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border-subtle);
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    flex-wrap: wrap;
+  }
+
+  .meta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .meta-link:hover {
+    color: var(--color-accent-primary);
+  }
+
+  .meta-dot {
+    color: var(--color-border-strong);
+  }
+
+  .degree-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-purple-primary);
+    background-color: var(--color-purple-light);
+    border: 1px solid var(--color-purple-border);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  /* Hero Visual */
+  .hero-visual {
+    width: 100%;
+  }
+
+  /* Pillar Cards */
+  .pillar-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pillar-num {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent-primary);
+    line-height: 1;
+  }
+
+  .pillar-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-text-primary);
+  }
+
+  .pillar-desc {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .pillar-evidence {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border-subtle);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .evidence-tag {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--color-accent-primary);
+    text-transform: uppercase;
+  }
+
+  /* Bridge Card */
+  .bridge-card {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .bridge-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 36px;
+  }
+
+  .bridge-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .bridge-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin: 8px 0 0;
+  }
+
+  .bridge-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .bridge-col {
+    background-color: var(--color-bg-subtle);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: 100%;
+  }
+
+  .bridge-col-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .bridge-icon {
+    font-size: 1.25rem;
+  }
+
+  .bridge-col-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-text-primary);
+  }
+
+  .bridge-question {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-accent-primary);
+    margin: 0;
+  }
+
+  .bridge-col-detail {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .bridge-divider-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bridge-center-badge {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: #FAF8F5;
+    background-color: var(--color-navy-dark);
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-align: center;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(18, 24, 34, 0.15);
+  }
+
+  .bridge-footer {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border-subtle);
+    text-align: center;
+  }
+
+  .bridge-conclusion {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    max-width: 760px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Projects Section */
+  .section-header-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* Process Grid */
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+
+  .process-card {
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .process-step {
+    font-family: var(--font-mono);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-accent-primary);
+  }
+
+  .process-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-text-primary);
+  }
+
+  .process-desc {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  @media (max-width: 960px) {
+    .hero-container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .bridge-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .bridge-divider-col {
+      order: 2;
+    }
+
+    .process-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+  }
+</style>

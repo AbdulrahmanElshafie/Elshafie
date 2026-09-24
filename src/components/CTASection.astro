@@ -1,0 +1,198 @@
+---
+import { profile } from '../data/profile';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  primaryCtaText?: string;
+  primaryCtaLink?: string;
+}
+
+const {
+  title = "Have a backend, AI workflow, or automation challenge?",
+  subtitle = "Whether you need to architect resilient Django APIs, construct deterministic LLM generation pipelines, or eliminate manual friction through automated workflows, let's explore your problem.",
+  primaryCtaText = "Start a conversation",
+  primaryCtaLink = "/contact/"
+} = Astro.props;
+---
+
+<section class="section cta-section-wrapper">
+  <div class="container">
+    <div class="cta-banner">
+      <div class="cta-content">
+        <span class="cta-eyebrow">Direct Engagement &amp; Collaboration</span>
+        <h2 class="cta-title">{title}</h2>
+        <p class="cta-subtitle">{subtitle}</p>
+
+        <div class="cta-actions">
+          <a href={primaryCtaLink} class="btn btn-accent">
+            <span>{primaryCtaText}</span>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3.33334 8H12.6667M12.6667 8L8.00001 3.33333M12.6667 8L8.00001 12.6667" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="/work/" class="btn btn-secondary">
+            <span>Review Case Studies</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="cta-channels">
+        <div class="channels-card">
+          <span class="channels-title">Direct Inquiries</span>
+          <div class="channel-item">
+            <span class="ch-label">Email:</span>
+            <a href={`mailto:${profile.email}`} class="ch-val">{profile.email}</a>
+          </div>
+          <div class="channel-item">
+            <span class="ch-label">Phone:</span>
+            <a href={`tel:${profile.phone.replace(/\s+/g, '')}`} class="ch-val">{profile.phone}</a>
+          </div>
+          <div class="channel-item">
+            <span class="ch-label">Location:</span>
+            <span class="ch-val">{profile.location}, {profile.country}</span>
+          </div>
+          <div class="channel-links">
+            <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="social-tag">LinkedIn</a>
+            <span class="dot">·</span>
+            <a href={profile.github} target="_blank" rel="noopener noreferrer" class="social-tag">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-banner {
+    background-color: var(--color-navy-dark);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    padding: 48px;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 40px;
+    align-items: center;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(180, 83, 9, 0.15), transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #F59E0B;
+    margin-bottom: 12px;
+  }
+
+  .cta-title {
+    color: #FFFFFF;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-bottom: 14px;
+    line-height: 1.25;
+  }
+
+  .cta-subtitle {
+    color: #CBD5E1;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    max-width: 560px;
+  }
+
+  .cta-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  /* Channels Box */
+  .channels-card {
+    background-color: var(--color-navy-surface);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .channels-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #94A3B8;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  .channel-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 0.8125rem;
+  }
+
+  .ch-label {
+    color: #64748B;
+    font-size: 0.75rem;
+  }
+
+  .ch-val {
+    color: #F8FAFC;
+    font-weight: 500;
+    text-decoration: none;
+    word-break: break-all;
+  }
+
+  .ch-val:hover {
+    color: #F59E0B;
+  }
+
+  .channel-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.8125rem;
+  }
+
+  .social-tag {
+    color: #F59E0B;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .social-tag:hover {
+    text-decoration: underline;
+  }
+
+  .dot {
+    color: #64748B;
+  }
+
+  @media (max-width: 900px) {
+    .cta-banner {
+      grid-template-columns: 1fr;
+      padding: 32px 24px;
+    }
+  }
+</style>
