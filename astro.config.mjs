@@ -4,7 +4,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://abdulrahman-saeed-elshafie.com',
+  site: 'https://abdulrahmanelshafie.github.io',
+  base: '/Elshafie',
   trailingSlash: 'always',
   integrations: [sitemap()],
 });

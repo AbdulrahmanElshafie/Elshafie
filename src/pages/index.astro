@@ -9,6 +9,7 @@ import { profile } from '../data/profile';
 import { projects } from '../data/projects';
 import { experiences } from '../data/experience';
 import { skillClusters } from '../data/skills';
+import { getPath } from '../utils/paths';
 
 const pageTitle = `${profile.name} | Backend & AI Engineer`;
 const pageDescription = "Backend & AI Engineer with a digital marketing background. Turning user needs into Django APIs, intelligent LLM pipelines, and resilient workflow automation in Cairo & Giza, Egypt.";
@@ -43,7 +44,7 @@ const pageDescription = "Backend & AI Engineer with a digital marketing backgrou
               <path d="M8 3.33334V12.6667M8 12.6667L12.6667 8.00001M8 12.6667L3.33333 8.00001" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
-          <a href="/contact/" class="btn btn-secondary">
+          <a href={getPath('/contact/')} class="btn btn-secondary">
             <span>Start a conversation</span>
           </a>
         </div>
@@ -66,7 +67,7 @@ const pageDescription = "Backend & AI Engineer with a digital marketing backgrou
             <span>LinkedIn</span>
           </a>
           <span class="meta-dot">·</span>
-          <a href="/about/#education" class="meta-link">
+          <a href={getPath('/about/#education')} class="meta-link">
             <span class="degree-tag">B.Sc. AI · Cairo Univ</span>
           </a>
         </div>
@@ -191,7 +192,7 @@ const pageDescription = "Backend & AI Engineer with a digital marketing backgrou
               Detailed case studies demonstrating how problem framing translates into backend APIs, automation engines, and reliable AI pipelines.
             </p>
           </div>
-          <a href="/work/" class="btn btn-secondary btn-sm header-cta-btn">
+          <a href={getPath('/work/')} class="btn btn-secondary btn-sm header-cta-btn">
             <span>View All Projects</span>
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M3.33334 8H12.6667M12.6667 8L8.00001 3.33333M12.6667 8L8.00001 12.6667" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>

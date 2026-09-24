@@ -1,5 +1,6 @@
 ---
 import { profile } from '../data/profile';
+import { getPath } from '../utils/paths';
 const currentYear = new Date().getFullYear();
 ---
 
@@ -29,11 +30,11 @@ const currentYear = new Date().getFullYear();
       <div class="footer-nav-col">
         <h3 class="footer-heading">Navigation</h3>
         <ul class="footer-links">
-          <li><a href="/work/">Selected Work</a></li>
-          <li><a href="/about/">About &amp; Background</a></li>
-          <li><a href="/about/#experience">Experience</a></li>
-          <li><a href="/contact/">Start a Conversation</a></li>
-          <li><a href="/sitemap-index.xml">Sitemap (XML)</a></li>
+          <li><a href={getPath('/work/')}>Selected Work</a></li>
+          <li><a href={getPath('/about/')}>About &amp; Background</a></li>
+          <li><a href={getPath('/about/#experience')}>Experience</a></li>
+          <li><a href={getPath('/contact/')}>Start a Conversation</a></li>
+          <li><a href={getPath('/sitemap-index.xml')}>Sitemap (XML)</a></li>
         </ul>
       </div>
 
@@ -41,9 +42,9 @@ const currentYear = new Date().getFullYear();
       <div class="footer-nav-col">
         <h3 class="footer-heading">Case Studies</h3>
         <ul class="footer-links">
-          <li><a href="/work/autowa/">AutoWA <span class="footer-pill">CV &amp; Automation</span></a></li>
-          <li><a href="/work/docmanager/">DocManager <span class="footer-pill">Django &amp; RBAC</span></a></li>
-          <li><a href="/work/autowritey/">Autowritey <span class="footer-pill">LLM Pipeline</span></a></li>
+          <li><a href={getPath('/work/autowa/')}>AutoWA <span class="footer-pill">CV &amp; Automation</span></a></li>
+          <li><a href={getPath('/work/docmanager/')}>DocManager <span class="footer-pill">Django &amp; RBAC</span></a></li>
+          <li><a href={getPath('/work/autowritey/')}>Autowritey <span class="footer-pill">LLM Pipeline</span></a></li>
         </ul>
       </div>
 

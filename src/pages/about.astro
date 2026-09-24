@@ -4,6 +4,7 @@ import ExperienceCard from '../components/ExperienceCard.astro';
 import CTASection from '../components/CTASection.astro';
 import { profile } from '../data/profile';
 import { experiences } from '../data/experience';
+import { getPath } from '../utils/paths';
 
 const pageTitle = `About & Background | ${profile.name} — Backend & AI Engineer`;
 const pageDescription = "Background, engineering philosophy, and career track record of Abdulrahman Saeed Elshafie. B.Sc. in AI from Cairo University, combining backend APIs with digital marketing thinking.";
@@ -16,13 +17,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://abdulrahman-saeed-elshafie.com/"
+      "item": "https://abdulrahmanelshafie.github.io/Elshafie/"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "About",
-      "item": "https://abdulrahman-saeed-elshafie.com/about/"
+      "item": "https://abdulrahmanelshafie.github.io/Elshafie/about/"
     }
   ]
 };
@@ -33,7 +34,7 @@ const breadcrumbSchema = {
     <div class="container">
       <nav class="breadcrumb-nav" aria-label="Breadcrumb">
         <ol class="breadcrumb-list">
-          <li><a href="/">Home</a></li>
+          <li><a href={getPath('/')}>Home</a></li>
           <li aria-hidden="true">/</li>
           <li aria-current="page">About</li>
         </ol>
@@ -119,7 +120,7 @@ const breadcrumbSchema = {
             <p class="aside-desc">
               Download the comprehensive resume detailing verified engineering experience, education, and credentials.
             </p>
-            <a href={profile.resumePlaceholder} class="btn btn-primary" download="Resume-Abdulrahman-Elshafie.pdf">
+            <a href={getPath(profile.resumePlaceholder)} class="btn btn-primary" download="Resume-Abdulrahman-Elshafie.pdf">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="7 10 12 15 17 10"></polyline>

@@ -1,5 +1,6 @@
 ---
 import { profile } from '../data/profile';
+import { getPath } from '../utils/paths';
 
 interface Props {
   title: string;
@@ -19,8 +20,9 @@ const {
   structuredData,
 } = Astro.props;
 
-const canonicalUrl = new URL(canonicalPath, Astro.site).href;
-const socialImageUrl = new URL(ogImage, Astro.site).href;
+const canonicalUrl = new URL(getPath(canonicalPath), Astro.site).href;
+const socialImageUrl = new URL(getPath(ogImage), Astro.site).href;
+const faviconUrl = getPath('/favicon.svg');
 
 // Base schema for Person & WebSite
 const basePersonSchema = {
@@ -86,7 +88,7 @@ const combinedSchema = structuredData
 <!-- Core Technical & Identification Meta -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/svg+xml" href={faviconUrl} />
 <meta name="generator" content={Astro.generator} />
 <link rel="canonical" href={canonicalUrl} />
 

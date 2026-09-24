@@ -4,6 +4,7 @@ import ProjectCard from '../../components/ProjectCard.astro';
 import CTASection from '../../components/CTASection.astro';
 import { projects } from '../../data/projects';
 import { profile } from '../../data/profile';
+import { getPath } from '../../utils/paths';
 
 const pageTitle = `Selected Work | ${profile.name} — Backend & AI Engineer`;
 const pageDescription = "Selected engineering case studies: AutoWA WhatsApp desktop automation, DocManager Django RESTful document platform, and Autowritey 11-stage LLM generation pipeline.";
@@ -16,13 +17,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://abdulrahman-saeed-elshafie.com/"
+      "item": "https://abdulrahmanelshafie.github.io/Elshafie/"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Selected Work",
-      "item": "https://abdulrahman-saeed-elshafie.com/work/"
+      "item": "https://abdulrahmanelshafie.github.io/Elshafie/work/"
     }
   ]
 };
@@ -34,7 +35,7 @@ const breadcrumbSchema = {
       <!-- Breadcrumb Navigation -->
       <nav class="breadcrumb-nav" aria-label="Breadcrumb">
         <ol class="breadcrumb-list">
-          <li><a href="/">Home</a></li>
+          <li><a href={getPath('/')}>Home</a></li>
           <li aria-hidden="true">/</li>
           <li aria-current="page">Selected Work</li>
         </ol>

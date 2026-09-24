@@ -1,4 +1,6 @@
 ---
+import { getPath } from '../utils/paths';
+
 interface Props {
   currentPath?: string;
 }
@@ -6,17 +8,17 @@ interface Props {
 const { currentPath = '' } = Astro.props;
 
 const navItems = [
-  { label: "Work", href: "/work/" },
-  { label: "About", href: "/about/" },
-  { label: "Experience", href: "/about/#experience" },
-  { label: "Contact", href: "/contact/" }
+  { label: "Work", href: getPath('/work/') },
+  { label: "About", href: getPath('/about/') },
+  { label: "Experience", href: getPath('/about/#experience') },
+  { label: "Contact", href: getPath('/contact/') }
 ];
 ---
 
 <header class="site-header" id="site-header">
   <div class="container header-container">
     <!-- Brand / Identity -->
-    <a href="/" class="brand-link" aria-label="Abdulrahman Saeed Elshafie Homepage">
+    <a href={getPath('/')} class="brand-link" aria-label="Abdulrahman Saeed Elshafie Homepage">
       <div class="brand-mark">
         <span class="brand-monogram">AE</span>
         <span class="brand-dot"></span>
@@ -31,7 +33,7 @@ const navItems = [
     <nav class="desktop-nav" aria-label="Main Navigation">
       <ul class="nav-list">
         {navItems.map((item) => {
-          const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href) && item.href !== '/about/#experience');
+          const isActive = currentPath === item.href || (item.href !== getPath('/') && currentPath.startsWith(item.href) && !item.href.includes('#'));
           return (
             <li class="nav-item">
               <a
@@ -46,7 +48,7 @@ const navItems = [
         })}
       </ul>
       <div class="nav-cta">
-        <a href="/contact/" class="btn btn-primary btn-sm">
+        <a href={getPath('/contact/')} class="btn btn-primary btn-sm">
           <span>Start a conversation</span>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M3.33334 8H12.6667M12.6667 8L8.00001 3.33333M12.6667 8L8.00001 12.6667" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
@@ -83,7 +85,7 @@ const navItems = [
         ))}
       </ul>
       <div class="mobile-nav-footer">
-        <a href="/contact/" class="btn btn-primary" style="width: 100%;">
+        <a href={getPath('/contact/')} class="btn btn-primary" style="width: 100%;">
           <span>Start a conversation</span>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M3.33334 8H12.6667M12.6667 8L8.00001 3.33333M12.6667 8L8.00001 12.6667" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
